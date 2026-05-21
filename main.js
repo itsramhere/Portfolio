@@ -49,7 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch('/api/blogs')
             .then(res => res.json())
             .then(data => {
-                if (data.blogs && data.blogs.length > 0) {
+                if (data.error) {
+                    blogList.innerHTML = `<p style="color:red;">Database Error: ${data.error}</p>`;
+                } else if (data.blogs && data.blogs.length > 0) {
                     blogList.innerHTML = '';
                     const latestBlogs = data.blogs.slice(0, 3);
                     latestBlogs.forEach(blog => {
@@ -77,7 +79,9 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch('/api/blogs')
             .then(res => res.json())
             .then(data => {
-                if (data.blogs && data.blogs.length > 0) {
+                if (data.error) {
+                    allBlogList.innerHTML = `<p style="color:red;">Database Error: ${data.error}</p>`;
+                } else if (data.blogs && data.blogs.length > 0) {
                     allBlogList.innerHTML = '';
                     data.blogs.forEach(blog => {
                         const article = document.createElement('article');
