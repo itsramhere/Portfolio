@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Power of Minimalism | Ramarathinam Iyer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="blog.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- MathJax for scientific equations -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Highlight.js for Code Formatting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+</head>
+<body class="blog-body">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">RI.</div>
+        <ul class="nav-links">
+            <li><a href="index.html#about">About Me</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="index.html#skills">Skills</a></li>
+            <li><a href="index.html#blogs">Blogs</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main class="blog-container">
+        <article class="blog-post" id="blog-post">
+            <p>Loading blog post...</p>
+        </article>
+        <div id="error-log" style="color:red; margin: 2rem;"></div>
+
+        <!-- Markdown Parser -->
+        <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
+        <script>
+            window.onerror = function(msg, url, lineNo, columnNo, error) {
+                document.getElementById('error-log').innerText += 'Error: ' + msg + ' at line ' + lineNo + '\n';
+                return false;
+            };
+            // Configure marked to use highlight.js
+            marked.setOptions({
+                highlight: function(code, lang) {
+                    const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+                    return hljs.highlight(code, { language }).value;
+                }
+            });
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const params = new URLSearchParams(window.location.search);
+                const id = params.get('id');
+
+                if (!id) {
+                    document.getElementById('blog-post').innerHTML = '<p>Blog post not found. <a href="index.html">Return home</a></p>';
+                    return;
+                }
+
+                fetch(`http://localhost:3000/api/blogs/${id}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.blog) {
+                            const blog = data.blog;
+                            const htmlContent = marked.parse(blog.content);
+                            
+                            // Update the webpage's title
+                            document.title = `${blog.title} | Ramarathinam Iyer`;
+                            
+                            document.getElementById('blog-post').innerHTML = `
+                                <header class="blog-header">
+                                    <span class="blog-date">${blog.date}</span>
+                                    <h1 class="blog-title">${blog.title}</h1>
+                                    <p class="blog-subtitle">${blog.subtitle}</p>
+                                </header>
+                                ${blog.cover_image ? `<img src="${blog.cover_image}" alt="Cover Image" class="blog-hero-image">` : ''}
+                                <div class="blog-content">
+                                    ${htmlContent}
+                                </div>
+                            `;
+
+                            // Trigger MathJax typesetting
+                            if (window.MathJax) {
+                                MathJax.typesetPromise();
+                            }
+                        } else {
+                            document.getElementById('blog-post').innerHTML = '<p>Blog post not found.</p>';
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        document.getElementById('blog-post').innerHTML = '<p>Error loading blog post.</p>';
+                    });
+            });
+        </script>
+    </main>
+</body>
+</html>

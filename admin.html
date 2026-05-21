@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Create Blog Post</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- EasyMDE Markdown Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
+    
+    <style>
+        body { background-color: #fcfcfc; padding-top: 100px; }
+        .admin-container { max-width: 800px; margin: 0 auto; padding: 2rem; background: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 0.5rem; }
+        .form-control { width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 4px; font-family: var(--font-sans); }
+        .btn-submit { background-color: var(--accent); color: white; border: none; padding: 1rem 2rem; border-radius: 4px; cursor: pointer; font-size: 1rem; font-weight: 600; }
+        .btn-submit:hover { opacity: 0.9; }
+        #message { margin-top: 1rem; padding: 1rem; border-radius: 4px; display: none; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">RI. Admin</div>
+        <ul class="nav-links">
+            <li><a href="index.html">View Site</a></li>
+        </ul>
+    </nav>
+
+    <div class="admin-container">
+        <h2>Create a New Blog Post</h2>
+        <form id="blogForm">
+            <div class="form-group">
+                <label for="title">Post Title</label>
+                <input type="text" id="title" class="form-control" placeholder="e.g., The Power of Minimalism" required>
+            </div>
+            <div class="form-group">
+                <label for="subtitle">Subtitle</label>
+                <input type="text" id="subtitle" class="form-control" placeholder="A short description" required>
+            </div>
+            <div class="form-group">
+                <label for="cover_image">Cover Image URL</label>
+                <input type="text" id="cover_image" class="form-control" placeholder="https://..." required>
+            </div>
+            <div class="form-group">
+                <label for="content">Content (Markdown supported)</label>
+                <textarea id="content"></textarea>
+                <small>Use markdown for formatting. For equations, use $$ LaTeX $$. For Medium emphasis, use HTML: <code>&lt;p class="medium-emphasis"&gt;...&lt;/p&gt;</code></small>
+            </div>
+            <button type="submit" class="btn-submit">Publish Post</button>
+            <div id="message"></div>
+        </form>
+    </div>
+
+    <script>
+        const easymde = new EasyMDE({ element: document.getElementById('content') });
+
+        document.getElementById('blogForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const title = document.getElementById('title').value;
+            const subtitle = document.getElementById('subtitle').value;
+            const cover_image = document.getElementById('cover_image').value;
+            const content = easymde.value();
+
+            try {
+                const response = await fetch('http://localhost:3000/api/blogs', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ title, subtitle, cover_image, content })
+                });
+                
+                const result = await response.json();
+                const msgEl = document.getElementById('message');
+                msgEl.style.display = 'block';
+                
+                if (response.ok) {
+                    msgEl.className = 'success';
+                    msgEl.innerText = 'Blog published successfully!';
+                    document.getElementById('blogForm').reset();
+                    easymde.value('');
+                } else {
+                    msgEl.className = 'error';
+                    msgEl.innerText = result.error || 'An error occurred';
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        });
+    </script>
+</body>
+</html>

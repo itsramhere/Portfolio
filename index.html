@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Minimalistic Portfolio of a Web Developer">
+    <title>Portfolio | Minimal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">RI.</div>
+        <ul class="nav-links">
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#blogs">Blogs</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="hero" class="hero fade-in">
+            <h1 class="hero-title">Ramarathinam <br><span class="highlight">Iyer.</span></h1>
+            <p class="hero-subtitle">Distributed Systems Enthusiast. I love building and experimenting with systems.</p>
+            <a href="#projects" class="btn">View Work</a>
+        </section>
+
+        <section id="about" class="section slide-up">
+            <div class="section-content">
+                <h2>About Me</h2>
+                <div class="about-grid">
+                    <p class="text-large">Hi!! You're probably unable to read my full name properly, and that's alright, you can just call me Ram. I'm currently studying in VIT University, Vellore. I like studying and understanding Backend Architecture, specifically Distributed Systems. I primarily code in Golang, JavaScript, TypeScript and C++. I like Databases and studying how they work as well!</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section slide-up">
+            <div class="section-content">
+                <h2>Selected Projects</h2>
+                <div class="project-list">
+                    <div class="project-card">
+                        <h3>taskQueuer</h3>
+                        <p>A distributed, fault-tolerant background job processing system built with TypeScript, Fastify, PostgreSQL, and Redis.</p>
+                        <a href="https://github.com/itsramhere/job-processor" target="_blank" class="project-link">View Project &#8594;</a>
+                    </div>
+                    <div class="project-card">
+                        <h3>deDup</h3>
+                        <p>A high-performance, intelligent user deduplication engine using fuzzy logic, phonetic matching, and NLP techniques.</p>
+                        <a href="https://github.com/itsramhere/dedup" target="_blank" class="project-link">View Project &#8594;</a>
+                    </div>
+                    <div class="project-card">
+                        <h3>dailyTutorials</h3>
+                        <p>An AI powered daily custom-lesson generating engine using Gemini API, PostgreSQL and Elastic.</p>
+                        <a href="https://github.com/itsramhere/dailyTutorials" target="_blank" class="project-link">View Project &#8594;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section slide-up">
+            <div class="section-content">
+                <h2>Skills</h2>
+                <div class="skills-carousel">
+                    <div class="skills-carousel-content">
+                        <!-- Slide 1 -->
+                        <div class="skills-slide">
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">C</span>
+                            <span class="skill-tag">C++</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">TypeScript</span>
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="skills-slide">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">HTML</span>
+                            <span class="skill-tag">CSS</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">Express</span>
+                        </div>
+                        <!-- Slide 3 -->
+                        <div class="skills-slide">
+                            <span class="skill-tag">Fastify</span>
+                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">SQLite</span>
+                            <span class="skill-tag">MongoDB</span>
+                            <span class="skill-tag">Redis</span>
+                        </div>
+                        <!-- Slide 4 -->
+                        <div class="skills-slide">
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Testing With Postman</span>
+                            <span class="skill-tag">React.js</span>
+                            <span class="skill-tag">Tailwind CSS</span>
+                        </div>
+                        <!-- Duplicate Slide 1 for seamless loop -->
+                        <div class="skills-slide">
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">C</span>
+                            <span class="skill-tag">C++</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">TypeScript</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="blogs" class="section slide-up">
+            <div class="section-content">
+                <h2>Latest Writings</h2>
+                <div class="blog-list" id="blog-list">
+                    <p>Loading blogs...</p>
+                </div>
+                <div style="margin-top: 2rem;">
+                    <a href="blogs.html" class="btn btn-outline">View All Writings &#8594;</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section slide-up">
+            <div class="section-content">
+                <h2>Let's Connect</h2>
+                <p>Have a project in mind or just want to say hi?</p>
+                <a href="mailto:ram.iyer200722@gmail.com" class="btn btn-outline">ram.iyer200722@gmail.com</a>
+
+                <h3 style="margin-top: 3rem; margin-bottom: 1rem; font-size: 1.5rem;">Find Me At</h3>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/ramarathinam-iyer" target="_blank" class="social-icon" aria-label="LinkedIn">
+                        <svg xmlns="http://www.svg.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/itsramhere" target="_blank" class="social-icon" aria-label="GitHub">
+                        <svg xmlns="http://www.svg.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+                            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+/* Blog Specific Styles */
+.blog-body {
+    background-color: #fdfbf7 !important; /* Cream background, overrides var(--bg-color) */
+    color: #292929;
+    font-family: 'Calibri', sans-serif;
+    line-height: 1.8;
+}
+
+.blog-container {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 120px 20px 80px 20px; /* Padding top for navbar */
+}
+
+.blog-header {
+    margin-bottom: 2rem;
+}
+
+.blog-date {
+    font-size: 0.875rem;
+    color: #6b6b6b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.blog-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    letter-spacing: -0.03em;
+    color: #1a1a1a;
+}
+
+.blog-subtitle {
+    font-size: 1.5rem;
+    color: #6b6b6b;
+    font-weight: 300;
+    line-height: 1.4;
+}
+
+.blog-hero-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 3rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.blog-content {
+    font-family: 'Calibri', sans-serif; /* Medium uses serif for blog body */
+    font-size: 1.125rem; /* 18px */
+}
+
+.blog-content p {
+    margin-bottom: 1.5rem;
+    color: #292929;
+}
+
+.blog-content h2 {
+    font-family: 'Calibri', sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    color: #1a1a1a;
+    line-height: 1.2;
+}
+
+.blog-content h3 {
+    font-family: 'Calibri', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #1a1a1a;
+}
+
+.blog-content ul, .blog-content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 2rem;
+}
+
+.blog-content li {
+    margin-bottom: 0.5rem;
+}
+
+.blog-content blockquote {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #1a1a1a;
+    border-left: 4px solid #1a1a1a;
+    padding-left: 1.5rem;
+    margin: 2.5rem 0;
+}
+
+.blog-content blockquote cite {
+    display: block;
+    font-family: 'Calibri', sans-serif;
+    font-size: 1rem;
+    font-style: normal;
+    color: #6b6b6b;
+    margin-top: 1rem;
+}
+
+.blog-content .equation {
+    font-family: 'Calibri', sans-serif;
+    background: #f4f2ec;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+    text-align: center;
+    overflow-x: auto;
+}
+
+/* Medium style emphasis */
+.medium-emphasis {
+    font-family: 'Calibri', sans-serif;
+    font-size: 1.35rem !important;
+    font-weight: 300;
+    line-height: 1.6;
+    color: #4a4a4a !important;
+    margin-bottom: 2.5rem !important;
+}
+
+/* Medium-style text highlighting */
+.blog-content mark {
+    background-color: #ffd27f;
+    color: #1a1a1a;
+    padding: 0 4px;
+    border-radius: 2px;
+}
+
+/* Code Blocks */
+.blog-content pre {
+    background: #ffffff;
+    border: 1px solid #e1e4e8;
+    color: #24292e;
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 2rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.blog-content code {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.95rem;
+    border-radius: 4px;
+}
+
+/* Inline code formatting */
+.blog-content :not(pre) > code {
+    background: #f0ede6;
+    padding: 0.2rem 0.4rem;
+    color: #d14;
+    font-size: 0.9rem;
+}
