@@ -68,7 +68,7 @@
             const content = easymde.value();
 
             try {
-                const response = await fetch('http://localhost:3000/api/blogs', {
+                const response = await fetch('/api/blogs', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ title, subtitle, cover_image, content })

@@ -60,7 +60,7 @@
                     return;
                 }
 
-                fetch(`http://localhost:3000/api/blogs/${id}`)
+                fetch(`/api/blogs/${id}`)
                     .then(res => res.json())
                     .then(data => {
                         if (data.blog) {

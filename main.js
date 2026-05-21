@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fetch blogs if on homepage
     const blogList = document.getElementById('blog-list');
     if (blogList) {
-        fetch('http://localhost:3000/api/blogs')
+        fetch('/api/blogs')
             .then(res => res.json())
             .then(data => {
                 if (data.blogs && data.blogs.length > 0) {
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fetch all blogs for the blogs.html page
     const allBlogList = document.getElementById('all-blog-list');
     if (allBlogList) {
-        fetch('http://localhost:3000/api/blogs')
+        fetch('/api/blogs')
             .then(res => res.json())
             .then(data => {
                 if (data.blogs && data.blogs.length > 0) {
