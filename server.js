@@ -46,13 +46,6 @@ pool.connect(async (err, client, release) => {
         )`);
         console.log('Users table verified.');
 
-        const userRes = await client.query("SELECT * FROM users WHERE username = $1", ['ramsadmin']);
-        if (userRes.rows.length === 0) {
-            const salt = await bcrypt.genSalt(10);
-            const hashed = await bcrypt.hash('itsRaam123!', salt);
-            await client.query("INSERT INTO users (username, password) VALUES ($1, $2)", ['ramsadmin', hashed]);
-            console.log('Admin user created.');
-        }
     } catch (dbErr) {
         console.error('Error during database initialization', dbErr.stack);
     } finally {
@@ -62,7 +55,11 @@ pool.connect(async (err, client, release) => {
 
 // API Routes
 
-const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret_key';
+if (!process.env.JWT_SECRET) {
+    console.error("CRITICAL: JWT_SECRET environment variable is missing!");
+    process.exit(1);
+}
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
@@ -84,13 +81,13 @@ app.post('/api/login', async (req, res) => {
         if (result.rows.length === 0) {
             return res.status(400).json({ error: 'Invalid credentials' });
         }
-        
+
         const user = result.rows[0];
         const validPassword = await bcrypt.compare(password, user.password);
         if (!validPassword) {
             return res.status(400).json({ error: 'Invalid credentials' });
         }
-        
+
         const token = jwt.sign({ id: user.id, username: user.username }, JWT_SECRET, { expiresIn: '6h' });
         res.json({ token });
     } catch (err) {
@@ -125,7 +122,7 @@ app.get('/api/blogs/:id', async (req, res) => {
 // Create a new blog
 app.post('/api/blogs', authenticateToken, async (req, res) => {
     const { title, subtitle, cover_image, content } = req.body;
-    
+
     if (!title || !content) {
         return res.status(400).json({ error: 'Title and content are required' });
     }
@@ -134,7 +131,7 @@ app.post('/api/blogs', authenticateToken, async (req, res) => {
     const formattedDate = new Date().toLocaleDateString('en-US', dateOptions);
 
     const query = `INSERT INTO blogs (title, subtitle, cover_image, content, date) VALUES ($1, $2, $3, $4, $5) RETURNING id`;
-    
+
     try {
         const result = await pool.query(query, [title, subtitle, cover_image, content, formattedDate]);
         res.json({ message: 'Blog created successfully', id: result.rows[0].id });
