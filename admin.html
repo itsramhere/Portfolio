@@ -28,11 +28,29 @@
         <div class="logo">RI. Admin</div>
         <ul class="nav-links">
             <li><a href="index.html">View Site</a></li>
+            <li><a href="#" id="logoutBtn" style="display: none;">Logout</a></li>
         </ul>
     </nav>
 
     <div class="admin-container">
-        <h2>Create a New Blog Post</h2>
+        <div id="loginSection">
+            <h2>Admin Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn-submit">Login</button>
+                <div id="loginMessage" style="display:none; margin-top:1rem; padding:1rem; border-radius:4px;"></div>
+            </form>
+        </div>
+
+        <div id="blogSection" style="display: none;">
+            <h2>Create a New Blog Post</h2>
         <form id="blogForm">
             <div class="form-group">
                 <label for="title">Post Title</label>
@@ -54,10 +72,61 @@
             <button type="submit" class="btn-submit">Publish Post</button>
             <div id="message"></div>
         </form>
+        </div>
     </div>
 
     <script>
         const easymde = new EasyMDE({ element: document.getElementById('content') });
+        const token = localStorage.getItem('adminToken');
+        
+        const loginSection = document.getElementById('loginSection');
+        const blogSection = document.getElementById('blogSection');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        if (token) {
+            loginSection.style.display = 'none';
+            blogSection.style.display = 'block';
+            logoutBtn.style.display = 'block';
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const msgEl = document.getElementById('loginMessage');
+            
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    localStorage.setItem('adminToken', result.token);
+                    loginSection.style.display = 'none';
+                    blogSection.style.display = 'block';
+                    logoutBtn.style.display = 'block';
+                    msgEl.style.display = 'none';
+                } else {
+                    msgEl.style.display = 'block';
+                    msgEl.className = 'error';
+                    msgEl.innerText = result.error || 'Invalid credentials';
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        });
+
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('adminToken');
+            loginSection.style.display = 'block';
+            blogSection.style.display = 'none';
+            logoutBtn.style.display = 'none';
+        });
 
         document.getElementById('blogForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -66,11 +135,15 @@
             const subtitle = document.getElementById('subtitle').value;
             const cover_image = document.getElementById('cover_image').value;
             const content = easymde.value();
+            const currentToken = localStorage.getItem('adminToken');
 
             try {
                 const response = await fetch('/api/blogs', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${currentToken}`
+                    },
                     body: JSON.stringify({ title, subtitle, cover_image, content })
                 });
                 
@@ -86,6 +159,12 @@
                 } else {
                     msgEl.className = 'error';
                     msgEl.innerText = result.error || 'An error occurred';
+                    if(response.status === 401 || response.status === 403) {
+                         localStorage.removeItem('adminToken');
+                         loginSection.style.display = 'block';
+                         blogSection.style.display = 'none';
+                         logoutBtn.style.display = 'none';
+                    }
                 }
             } catch (err) {
                 console.error(err);

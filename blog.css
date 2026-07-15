@@ -2,7 +2,7 @@
 .blog-body {
     background-color: #fdfbf7 !important; /* Cream background, overrides var(--bg-color) */
     color: #292929;
-    font-family: 'Calibri', sans-serif;
+    font-family: 'FreightDisp Pro Book', serif;
     line-height: 1.8;
 }
 
@@ -50,7 +50,7 @@
 }
 
 .blog-content {
-    font-family: 'Calibri', sans-serif; /* Medium uses serif for blog body */
+    font-family: 'FreightDisp Pro Book', serif; /* Medium uses serif for blog body */
     font-size: 1.125rem; /* 18px */
 }
 
@@ -60,7 +60,7 @@
 }
 
 .blog-content h2 {
-    font-family: 'Calibri', sans-serif;
+    font-family: 'FreightDisp Pro Book', serif;
     font-size: 2rem;
     font-weight: 600;
     margin-top: 3rem;
@@ -70,7 +70,7 @@
 }
 
 .blog-content h3 {
-    font-family: 'Calibri', sans-serif;
+    font-family: 'FreightDisp Pro Book', serif;
     font-size: 1.5rem;
     font-weight: 600;
     margin-top: 2rem;
@@ -98,7 +98,7 @@
 
 .blog-content blockquote cite {
     display: block;
-    font-family: 'Calibri', sans-serif;
+    font-family: 'FreightDisp Pro Book', serif;
     font-size: 1rem;
     font-style: normal;
     color: #6b6b6b;
@@ -106,7 +106,7 @@
 }
 
 .blog-content .equation {
-    font-family: 'Calibri', sans-serif;
+    font-family: 'FreightDisp Pro Book', serif;
     background: #f4f2ec;
     padding: 1.5rem;
     border-radius: 8px;
@@ -117,7 +117,7 @@
 
 /* Medium style emphasis */
 .medium-emphasis {
-    font-family: 'Calibri', sans-serif;
+    font-family: 'FreightDisp Pro Book', serif;
     font-size: 1.35rem !important;
     font-weight: 300;
     line-height: 1.6;
